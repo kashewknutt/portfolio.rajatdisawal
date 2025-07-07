@@ -52,11 +52,14 @@ export default async function ProjectsPage() {
             >
               <div className="space-y-3 justify-between flex flex-col h-full">
                 <div className="">
+                  <div className="w-full h-40 relative">
                 <Image
                   src={project.content.billboard} 
                   alt={project.content.title} 
-                  className="w-full h-40 object-cover mb-3"
+                  className="object-cover mb-3"
+                  fill
                 />
+                </div>
                 <h2 className="font-oldEnglish text-xl border-b border-borderSecondary pb-2">
                   {project.content.title}
                 </h2>
@@ -69,11 +72,14 @@ export default async function ProjectsPage() {
                 </div>
                 <div className="pt-4 text-[10px] italic flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
+                    <div className="relative w-6 h-6 rounded-full">
                     <Image
                       src={project.author.image} 
                       alt={project.author.name}
-                      className="w-6 h-6 rounded-full"
+                      className="rounded-full"
+                      fill
                     />
+                    </div>
                     <span>By {project.author.name}</span>
                   </div>
                   <a 

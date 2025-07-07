@@ -96,11 +96,11 @@ const PostPage = () => {
 
           {/* Featured Image */}
           {post.image && (
-            <div className="mb-8">
+            <div className="mb-8 w-full h-auto relative">
               <Image
                 src={post.image} 
-                alt={post.title} 
-                className="w-full h-auto"
+                alt={post.title}
+                fill
               />
             </div>
           )}
@@ -129,11 +129,13 @@ const PostPage = () => {
         <div className="mt-12 border-t border-borderPrimary pt-4">
           <div className="flex items-center">
             {post.author.image && (
+              <div className="w-12 h-12 rounded-full mr-4 relative">
               <Image 
                 src={post.author.image} 
                 alt={post.author.name}
-                className="w-12 h-12 rounded-full mr-4"
+                fill
               />
+              </div>
             )}
             <div>
               <p className="font-oldEnglish text-sm">{post.author.name}</p>

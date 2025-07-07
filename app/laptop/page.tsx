@@ -509,6 +509,18 @@ export default function LaptopPage() {
     });
   }, [router, isDarkMode, collisionsMap, redirectionsMap]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+        const refreshedTimestamp = sessionStorage.getItem('refreshed');
+        const now = new Date().getTime();
+
+        if (!refreshedTimestamp || now - parseInt(refreshedTimestamp, 10) > 3 * 60 * 1000) {
+            sessionStorage.setItem('refreshed', now.toString());
+            window.location.reload();
+        }
+    }
+  }, []);
+
   return (
     <div className={`relative h-screen w-screen flex items-center justify-center px-6 py-4 ${isDarkMode ? "bg-[#1a1a1a]" : "bg-[#e0e6eb]"} gap-4`}>
       {/* Canvas Section */}

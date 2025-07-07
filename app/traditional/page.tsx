@@ -53,7 +53,7 @@ const TraditionalPage = () => {
         <div className="text-center border-b border-borderSecondary pb-2">
           <div className="flex justify-between flex-col md:flex-row text-[10px] uppercase mb-2">
             <span>VOL. 00001</span>
-            <span>WEDNESDAY 07 APRIL 2004 | Rajat is born</span>
+            <span>{new Date().toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
             <span>NO.007</span>
           </div>
           <h1 className="font-oldEnglish text-3xl sm:text-5xl mb-4">

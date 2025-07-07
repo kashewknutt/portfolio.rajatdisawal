@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { checkDevice } from "@/lib/deviceCheck";
 import { Sprite } from "./SpriteClass";
@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 export default function LaptopPage() {
   const router = useRouter();
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [loading, setLoading] = useState(true);
   const animationFrameRef = useRef<number | null>(null);
 
   if (checkDevice() !== "laptop") {
@@ -30,18 +29,19 @@ export default function LaptopPage() {
 
   const collisionsMap: number[][] = MapData(collisions, 70);
 
-  const redirectionsMap: redirectionsMapProps[] = []
-  redirections.forEach((redirection) => {
-    redirectionsMap.push({
+  const redirectionsMap: redirectionsMapProps[] = useMemo(() => {
+    return redirections.map((redirection) => ({
       id: redirection.id,
       title: redirection.title,
       description: redirection.description,
       link: redirection.link,
-      data: MapData(redirection.data, 70)
-    });
-  });
+      data: MapData(redirection.data, 70),
+    }));
+  }, []);
 
   useEffect(() => {
+    
+
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
     }
@@ -207,7 +207,7 @@ export default function LaptopPage() {
       initiated: false
     };
 
-    
+    let moving = [1, 1, 1, 1];
     function animate() {
       if (bg) {
         const animationId = animationFrameRef.current = requestAnimationFrame(animate);
@@ -226,7 +226,7 @@ export default function LaptopPage() {
 
 
         if (redirectflow.initiated) return;
-        let moving = [1,1,1,1];
+        moving = [1,1,1,1];
         player!.moving = false;
 
         if (keys.a.pressed || keys.d.pressed || keys.s.pressed || keys.w.pressed) {
@@ -296,7 +296,7 @@ export default function LaptopPage() {
 
         if (keys.w.pressed) {
           player!.moving = true;
-          player!.image = player!.sprites.up;
+          player!.image = player!.sprites!.up;
           for(let i = 0; i < boundries.length; i++) {
             const boundry = boundries[i];
             if (
@@ -327,7 +327,7 @@ export default function LaptopPage() {
         }
         if (keys.a.pressed) {
           player!.moving = true;
-          player!.image = player!.sprites.left;
+          player!.image = player!.sprites!.left;
           for(let i = 0; i < boundries.length; i++) {
             const boundry = boundries[i];
             if (
@@ -358,7 +358,7 @@ export default function LaptopPage() {
         }
         if (keys.s.pressed) {
           player!.moving = true;
-          player!.image = player!.sprites.down;
+          player!.image = player!.sprites!.down;
           for(let i = 0; i < boundries.length; i++) {
             const boundry = boundries[i];
             if (
@@ -389,7 +389,7 @@ export default function LaptopPage() {
         }
         if (keys.d.pressed) {
           player!.moving = true;
-          player!.image = player!.sprites.right;
+          player!.image = player!.sprites!.right;
           for(let i = 0; i < boundries.length; i++) {
             const boundry = boundries[i];
             if (
@@ -422,13 +422,14 @@ export default function LaptopPage() {
     }
     animate();
 
+    let draggable: (Boundry | Sprite)[] = [];
     window.addEventListener("mousedown", (e) => {
       const rect = canvas.getBoundingClientRect();
       if (e.clientX >= rect.left && 
         e.clientX <= rect.right && 
         e.clientY >= rect.top && 
         e.clientY <= rect.bottom) {
-      let draggable = movables.concat([player]);
+      draggable = movables.concat([player]);
       const startPos = draggable.map(movable => ({ x: movable!.position.x, y: movable!.position.y }));
 
       const moveHandler = (e: MouseEvent) => {
@@ -506,7 +507,7 @@ export default function LaptopPage() {
         }
       };
     });
-  }, [router, isDarkMode]);
+  }, [router, isDarkMode, collisionsMap, redirectionsMap]);
 
   return (
     <div className={`relative h-screen w-screen flex items-center justify-center px-6 py-4 ${isDarkMode ? "bg-[#1a1a1a]" : "bg-[#e0e6eb]"} gap-4`}>

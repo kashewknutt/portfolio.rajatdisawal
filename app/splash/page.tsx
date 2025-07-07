@@ -8,13 +8,16 @@ export default function SplashScreen() {
   const [showLogo, setShowLogo] = useState(true);
 
   useEffect(() => {
+    if (!showLogo) {
+      setShowLogo(true);
+    }
     const timer = setTimeout(() => {
       const deviceType = checkDevice();
       router.push(`/${deviceType}`);
     }, 2000); // 2-second delay
 
     return () => clearTimeout(timer);
-  }, [router]);
+  }, [router, showLogo]);
 
   return (
     <div className="flex items-center justify-center duration-300 h-screen bg-[#e0e6eb] px-6 py-4">
@@ -22,7 +25,7 @@ export default function SplashScreen() {
       <div className="text-center border border-borderPrimary rounded-lg p-2 md:p-6 text-textPrimary">
         <h1 className="text-4xl font-bold mb-2">Welcome...</h1>
         <p className="text-lg mb-4">This just in. A new viewer visited kashewknutt.com</p>
-        <p className="text-sm text-textPrimary">"Coding & Music in Harmony"</p>
+        <p className="text-sm text-textPrimary">&ldquo;Coding & Music in Harmony&rdquo;</p>
       </div>
       )}
     </div>

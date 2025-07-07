@@ -1,11 +1,11 @@
 'use client'
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const PostPage = () => {
   const { slug } = useParams();
-  const router = useRouter();
 
   interface Post {
     id: string;
@@ -19,7 +19,7 @@ const PostPage = () => {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    metadata: any;
+    metadata: Record<string, unknown>;
     author: {
       name: string;
       image: string;
@@ -97,7 +97,7 @@ const PostPage = () => {
           {/* Featured Image */}
           {post.image && (
             <div className="mb-8">
-              <img 
+              <Image
                 src={post.image} 
                 alt={post.title} 
                 className="w-full h-auto"
@@ -129,7 +129,7 @@ const PostPage = () => {
         <div className="mt-12 border-t border-borderPrimary pt-4">
           <div className="flex items-center">
             {post.author.image && (
-              <img 
+              <Image 
                 src={post.author.image} 
                 alt={post.author.name}
                 className="w-12 h-12 rounded-full mr-4"

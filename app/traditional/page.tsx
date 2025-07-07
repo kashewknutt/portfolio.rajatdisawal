@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { landingAbout } from '@/lib/content';
 import { Gossip, GossipsResponse, Post, PostsResponse } from '@/lib/types';
+import Image from 'next/image';
 
 
 const TraditionalPage = () => {
@@ -36,8 +37,8 @@ const TraditionalPage = () => {
     }
   };
 
-  const getResume = () => {
-    const link = document.createElement('a');
+  const getResume = (): void => {
+    const link: HTMLAnchorElement = document.createElement('a');
     link.href = '/data/RajatDisawalResume.pdf';
     link.download = 'RajatDisawalResume.pdf';
     document.body.appendChild(link);
@@ -70,7 +71,7 @@ const TraditionalPage = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               <div className="md:col-span-2">
               <h3 className="text-lg sm:text-xl font-serif italic mb-4">
-                "He might be the next thing..."
+                &ldquo;He might be the next thing...&rdquo;
               </h3>
               <h3 className="text-xs mb-2 italic">Meet the Maestro: Musician, AI Developer, and Critical Thinker!</h3>
               </div>
@@ -88,7 +89,7 @@ const TraditionalPage = () => {
                 </p>
               </div>
               <div>
-                <img className='p-2' src="images/landingPortrait.jpg" alt="Rajat Disawal Profile" />
+                <Image className='p-2' src="images/landingPortrait.jpg" alt="Rajat Disawal Profile" />
               </div>
             </div>
           </div>

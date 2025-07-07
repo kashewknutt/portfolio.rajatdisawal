@@ -25,7 +25,7 @@ export default async function BlogsPage() {
         {/* Blog Grid */}
         <div className="mt-8 grid grid-cols-1 gap-8">
           {result.posts.map((post, index) => (
-            <Link key={post.id} href={`blogs/${post.slug}`}>
+            <Link key={post.id + index} href={`blogs/${post.slug}`}>
                 <div className="border-b border-borderPrimary bg-primaryDark hover:bg-opacity-30 bg-opacity-0 transition duration-1000 ease-out cursor-pointer origin-center grid grid-cols-1 md:grid-cols-[auto,1fr] p-2">
                 <div className="aspect-[16/9] relative md:h-28 mb-2 md:mb-0 md:mr-2">
                   {post.image ? (
@@ -36,10 +36,11 @@ export default async function BlogsPage() {
                     fill
                   />
                   ) : (
-                  <img 
+                  <Image 
                     src="https://placehold.co/600x400" 
                     alt="placeholder"
-                    className="w-full h-full object-cover"
+                    className="object-cover"
+                    fill
                   />
                   )}
                 </div>

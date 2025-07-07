@@ -5,7 +5,12 @@ interface SpriteProps {
         y: number 
     }, 
     image: HTMLImageElement,
-    sprites?: any,
+    sprites?: {
+        up: HTMLImageElement,
+        down: HTMLImageElement,
+        left: HTMLImageElement,
+        right: HTMLImageElement
+    },
     width?: number,
     height?: number,
     frames?: {
@@ -38,7 +43,12 @@ export class Sprite {
         elapsed?: number
     };
     image: HTMLImageElement;
-    sprites?: any;
+    sprites?: {
+        up: HTMLImageElement,
+        down: HTMLImageElement,
+        left: HTMLImageElement,
+        right: HTMLImageElement
+    };
     velocity: {
         x: number,
         y: number

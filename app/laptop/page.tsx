@@ -40,7 +40,7 @@ export default function LaptopPage() {
   }, []);
 
   useEffect(() => {
-    
+    if (typeof window === 'undefined') return;
 
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);

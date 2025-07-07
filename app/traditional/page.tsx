@@ -88,8 +88,8 @@ const TraditionalPage = () => {
                   {landingAbout[1]}
                 </p>
               </div>
-              <div>
-                <Image className='p-2' src="images/landingPortrait.jpg" alt="Rajat Disawal Profile" />
+              <div className='relative w-full'>
+                <Image className='p-2' src="/images/landingPortrait.jpg" alt="Rajat Disawal Profile" fill/>
               </div>
             </div>
           </div>

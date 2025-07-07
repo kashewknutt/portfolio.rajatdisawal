@@ -60,3 +60,5 @@ export interface GossipsResponse {
         prevPage: number | null;
     };
 }
+
+

@@ -11,7 +11,7 @@ export default function AlphaTabViewer({ fileUrl }: { fileUrl: string }) {
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.min.js";
     script.onload = () => {
-      const api = new (window as any).alphaTab.AlphaTabApi(alphaRef.current!, {
+      const api = new (window as unknown as { alphaTab: { AlphaTabApi: new (element: HTMLElement, options: { file: string; player: { enablePlayer: boolean }; display: { layoutMode: string; notationMode: string } }) => void } }).alphaTab.AlphaTabApi(alphaRef.current!, {
         file: fileUrl,
         player: {
           enablePlayer: true,
@@ -21,6 +21,7 @@ export default function AlphaTabViewer({ fileUrl }: { fileUrl: string }) {
           notationMode: "guitar",
         },
       });
+      console.log(api);
     };
     document.body.appendChild(script);
   }, [fileUrl]);

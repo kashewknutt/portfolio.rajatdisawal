@@ -47,12 +47,12 @@ export default async function ProjectsPage() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
           {result.contents.map((project) => (
             <a 
+              key={project.id}
               href={project.content.link} 
               target="_blank" 
               rel="noopener noreferrer"
             >
             <div 
-              key={project.id} 
               className="border border-borderPrimary bg-primaryDark hover:bg-opacity-30 bg-opacity-0 transition-all duration-1000 ease-out origin-center p-4 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
             >
               <div className="space-y-3 justify-between flex flex-col h-full">
